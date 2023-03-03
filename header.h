@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <vector>
+#include <string>
 
 using std::cout;
 using std::cin;
@@ -16,3 +17,6 @@ using std::setprecision;
 using std::fixed;
 using std::sort;
 using std::vector;
+using std::ifstream;
+using std::ofstream;
+using std::getline;
