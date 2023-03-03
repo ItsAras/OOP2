@@ -1,13 +1,6 @@
-### Implemented the program using C arrays and vectors.
-
-**Implementation with C arrays**
-- Input is read from console.
-- Students structure and their grades are dynamically saved.
-- Poor performance due to copying.
+### Implemented the program using vectors.
 
  **Implementation with vectors**
-- Input is read from console.
-- Students structure and their grades are saved using vectors.
-- Better performance.
-
-Implemented security that won't let the user input wrong data.
+- Added functionallity to read data from files.
+- Added safety to reduce errors.
+- Added functionallity to output results to a file.
