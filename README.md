@@ -9,7 +9,4 @@ Added 3 types of containers: vector, list, deque. You can see performance of eac
 |      1 000 000     |                   29                   |                  30                  |                   27                  |
 |     10 000 000     |                   240                  |                  289                 |                  353                  |
 
-Performance was tested using these system specifications:
-CPU - AMD Ryzen 3800XT
-RAM - 16 GB
-SSD - 1 TB
+Performance was tested using these system specifications: AMD Ryzen 3800XT, 16 GB, 1TB SSD.
