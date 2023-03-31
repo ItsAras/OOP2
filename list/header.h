@@ -41,5 +41,6 @@ void printStudentsToFile(list<Student>);
 void readFile(list<Student> &, Student &, list<Student>, list<Student>);
 bool sortAscending(Student &, Student &);
 void generateFile(list<Student> &, Student &, list<Student>, list<Student>);
+void sortingTest(list<Student> &, Student &, list<Student>, list<Student>);
 int getRandomGrade();
 void sortStudents(list<Student>, list<Student> &, list<Student> &);
