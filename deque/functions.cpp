@@ -194,22 +194,46 @@ void generateFile(deque<Student> &tmp, Student &temp, deque<Student> nerd, deque
     fr.close();
 
     auto timeEnd = std::chrono::system_clock::now();
-    auto elapsedTime =  std::chrono::duration_cast<std::chrono::seconds>(timeEnd - timeStart);
+    std::chrono::duration<double> elapsedTime = timeEnd - timeStart;
 
-    cout << "File generated. File generating took " << elapsedTime.count() << " seconds." << endl;
+    cout << "File generated. File generating took " << fixed << setprecision(2) << elapsedTime.count() << " seconds." << endl;
+}
 
-    timeStart = std::chrono::system_clock::now();
-
-    string fileName = to_string(numberOfStudents) + ".txt";
-    string line;
+void sortingTest(deque<Student> &tmp, Student &temp, deque<Student> nerd, deque<Student> noob)
+{
     ifstream fd;
+    fd.exceptions(std::ios::failbit);
+    string fileName;
+    string line;
+    bool fileExists = false;
+    int numberOfGrades = -3;
     int x;
 
-    fd.open(fileName);
-    fd.rdbuf();
-    cout << "Reading file. Please wait... " << endl;
+    while (fileExists == false) 
+    {
+        try
+        {
+            cout << "File's name (Example: students.txt): ";
+            cin >> fileName;
+            fd.open(fileName);
+            fd.rdbuf();
+            fileExists = true;
+        } catch(std::ios_base::failure &fail) {
+            cout << "Wrong file name provided. Make sure the file exists: ";
+        }
+    }
+
+    while (fd.peek() != '\n')
+    {
+        fd >> fileName;
+        numberOfGrades++;
+    }
 
     getline(fd, line);
+
+    cout << "Reading file. Please wait... " << endl;
+    auto testStart = std::chrono::system_clock::now();
+    auto timeStart = std::chrono::system_clock::now();
 
     while(!fd.eof())
     {
@@ -230,29 +254,31 @@ void generateFile(deque<Student> &tmp, Student &temp, deque<Student> nerd, deque
         temp.grades.clear();
     }
 
+    fd.close();
+
+    auto timeEnd = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsedTime = timeEnd - timeStart;
+    cout << "Reading completed in " << fixed << setprecision(2) << elapsedTime.count() << " seconds. Sorting students..." << endl;
+
+    timeStart = std::chrono::system_clock::now();
+
     sort(tmp.begin(), tmp.end(), [](Student& A, Student& B)
     { 
         return A.name < B.name; 
     });
 
-    fd.close();
-
-    printStudentsToFile(tmp, "results");
     timeEnd = std::chrono::system_clock::now();
-    elapsedTime =  std::chrono::duration_cast<std::chrono::seconds>(timeEnd - timeStart);
-    cout << "Reading completed in " << elapsedTime.count() << " seconds. Sorting students..." << endl;
+    elapsedTime = timeEnd - timeStart;
+    cout << "Sorting completed in " << fixed << setprecision(2) << elapsedTime.count() << " seconds. Dividing students..." << endl;
     timeStart = std::chrono::system_clock::now();
-    
 
     sortStudents(tmp, nerd, noob);
 
     timeEnd = std::chrono::system_clock::now();
-    elapsedTime =  std::chrono::duration_cast<std::chrono::seconds>(timeEnd - timeStart);
-    auto generatingEnd = std::chrono::system_clock::now();
-    auto programTime = std::chrono::duration_cast<std::chrono::seconds>(generatingEnd - generatingStart);
-
-    cout << "Sorting completed in " << elapsedTime.count() << " seconds. Program finished in " << programTime.count() << "seconds." << endl;
-    
+    auto testEnd = std::chrono::system_clock::now();
+    elapsedTime = timeEnd - timeStart;
+    std::chrono::duration<double> testTime = testEnd - testStart;
+    cout << "Dividing completed in " << fixed << setprecision(2) << elapsedTime.count() << " seconds. Program finished in " << fixed << setprecision(2) << testTime.count() << " seconds." << endl;
 }
 
 int getRandomGrade() {
