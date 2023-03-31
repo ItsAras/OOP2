@@ -17,6 +17,10 @@ int main()
     cin >> userInput;
     if (userInput == 'y' || userInput == 'Y') generateFile(student, tmp, nerd, noob);
 
+    cout << "Do you want to run a benchmark? Y - (YES), N - (NO): ";
+    cin >> userInput;
+    if (userInput == 'y' || userInput == 'Y') sortingTest(student, tmp, nerd, noob);
+
     else
     {
         do
