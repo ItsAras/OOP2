@@ -40,5 +40,6 @@ void printStudents(deque<Student>);
 void printStudentsToFile(deque<Student>);
 void readFile(deque<Student> &, Student &, deque<Student>, deque<Student>);
 void generateFile(deque<Student> &, Student &, deque<Student>, deque<Student>);
+void sortingTest(deque<Student> &, Student &, deque<Student>, deque<Student>);
 int getRandomGrade();
 void sortStudents(deque<Student>, deque<Student> &, deque<Student> &);
