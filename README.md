@@ -3,10 +3,10 @@ Added 3 types of containers: vector, list, deque. You can see performance of eac
 
 | Number of students | Vector container performance (seconds) | List container performance (seconds) | Deque container performance (seconds) |
 |:------------------:|:--------------------------------------:|:------------------------------------:|:-------------------------------------:|
-|        1 000       |                    3                   |                   4                  |                   2                   |
-|       10 000       |                    4                   |                   4                  |                   3                   |
-|       100 000      |                   10                   |                   9                  |                   6                   |
-|      1 000 000     |                   29                   |                  30                  |                   27                  |
-|     10 000 000     |                   240                  |                  289                 |                  353                  |
+|        1 000       |                    0.01                |                   0.01               |                   0.01                |
+|       10 000       |                    0.09                |                   0.12               |                   0.11                |
+|       100 000      |                    0.84                |                   1.13               |                   1.04                |
+|      1 000 000     |                    8.79                |                   11.68              |                   10.93               |
+|     10 000 000     |                    87.11               |                   126.12             |                  179.36               |
 
 Performance was tested using these system specifications: AMD Ryzen 3800XT, 16 GB, 1TB SSD.
