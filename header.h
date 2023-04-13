@@ -40,5 +40,6 @@ void printStudents(vector<Student>);
 void printStudentsToFile(vector<Student>);
 void readFile(vector<Student> &, Student &, vector<Student>, vector<Student>);
 void generateFile(vector<Student> &, Student &, vector<Student>, vector<Student>);
+void sortingTest(vector<Student> &, Student &, vector<Student>, vector<Student>);
 int getRandomGrade();
 void sortStudents(vector<Student>, vector<Student> &, vector<Student> &);
