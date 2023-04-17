@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.25)
+project(StudentApp)
+file(GLOB VECTOR "vector/*.cpp")
+file(GLOB LIST "list/*.cpp")
+file(GLOB DEQUE "deque/*.cpp")
+add_executable(StudentAppVector ${VECTOR})
+add_executable(StudentAppList ${LIST})
+add_executable(StudentAppDeque ${DEQUE})
