@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <vector>
+#include <random>
 
 using std::cout;
 using std::cin;
