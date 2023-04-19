@@ -101,6 +101,7 @@ int main()
     char userInput;
     vector<Student> student;
     Student tmp;
+    srand(time(NULL));
 
     do
     {
