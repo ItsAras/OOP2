@@ -10,6 +10,10 @@ struct Student
     double median;
 };
 
+int getRandomGrade() {
+    return 1 + rand() % 10;
+}
+
 void getGrades(Student &tmp)
 {
     int x;
@@ -104,16 +108,13 @@ void printStudents(Student* tmp, int n)
     }
 }
 
-int getRandomGrade() {
-    return 1 + rand() % 10;
-}
-
 int main()
 {
     char userInput;
     Student* student;
     Student* tmp;
     int numberOfStudents = 1;
+    srand(time(NULL));
 
     do
     {
