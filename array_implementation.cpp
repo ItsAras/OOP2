@@ -27,12 +27,15 @@ void getGrades(Student &tmp)
 
         tmp.grades = new int[tmp.numberOfGrades];
         cout << "Student's [" << tmp.numberOfGrades << "] grade: ";
+
         while (!(cin >> x))
         {
             cin.clear();
             cin.ignore();
             cout << "Invalid input. You need to type a number... ";
         }
+
+        if (x == 0) x = getRandomGrade();
 
         temp[tmp.numberOfGrades - 1] = x;
         copy(temp, temp + tmp.numberOfGrades, tmp.grades);
@@ -84,6 +87,8 @@ void getStudent(Student &tmp)
         cin.ignore();
         cout << "Invalid input. You need to type a number... ";
     }
+
+    if (x == 0) x = getRandomGrade();
     
     tmp.exam = x;
 }
@@ -97,6 +102,10 @@ void printStudents(Student* tmp, int n)
     {
         cout << setw(20) << tmp[i].name << setw(30) << tmp[i].surname << setw(30) << fixed << setprecision(2) << 0.4 * tmp[i].average + 0.6 * tmp[i].exam << setw(15) << setprecision(2) << 0.4 * tmp[i].median + 0.6 * tmp[i].exam << endl;
     }
+}
+
+int getRandomGrade() {
+    return 1 + rand() % 10;
 }
 
 int main()
