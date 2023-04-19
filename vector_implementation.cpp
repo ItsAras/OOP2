@@ -25,6 +25,8 @@ void getGrades(Student &tmp)
             cout << "Invalid input. You need to type a number... ";
         }
 
+        if (x == 0) x = getRandomGrade();
+
         tmp.grades.push_back(x);
 
         cout << "Press N when finished. Press any key to continue... ";
@@ -73,6 +75,8 @@ void getStudent(Student &tmp)
         cin.ignore();
         cout << "Invalid input. You need to type a number... ";
     }
+
+    if (x == 0) x = getRandomGrade();
     
     tmp.exam = x;
 }
@@ -86,6 +90,10 @@ void printStudents(vector<Student> tmp)
     {
         cout << setw(20) << i.name << setw(30) << i.surname << setw(30) << fixed << setprecision(2) << 0.4 * i.average + 0.6 * i.exam << setw(15) << setprecision(2) << 0.4 * i.median + 0.6 * i.exam << endl;
     }
+}
+
+int getRandomGrade() {
+    return 1 + rand() % 10;
 }
 
 int main()
