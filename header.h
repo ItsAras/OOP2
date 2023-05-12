@@ -28,31 +28,31 @@ using std::find_if;
 class Student
 {
     private:
-        string name;
-        string surname;
-        vector<int> grades;
+        string name, surname;
         int exam;
         double average;
         double median;
 
     public:
-        Student() : exam(0) {}
+        vector<int> grades;
+        Student() : exam(0) { }
         Student(std::istream& is);
-        inline string Name() const { return name; }
-        inline string Surname() const { return surname; }
-        inline vector<int> Grades() const { return grades; }
-        inline int Exam() const { return exam; }
-        inline double Average() const { return average; }
-        inline double Median() const { return median; }
-        void SetName(string name) { name = name; }
-        void SetSurname(string surname) { surname = surname; }
-        void SetGrade(vector<int> grades) { grades = grades; }
-        void SetExam(int exam) { exam = exam; }
-        void SetAverage(double average) { average = average; }
-        void SetMedian(double median) { average = average; }
-        void ClearGrades() { grades.clear(); }
-        std::istream& ReadStudent(std::istream&);
-        ~Student() {};
+
+        inline string getName() const { return name; };
+        inline string getSurname() const { return surname; };
+        const vector<int>& getGrades() const { return grades; };
+        inline int getExam() const { return exam; };
+        inline double getAverage() const { return average; };
+        inline double getMedian() const { return median; };
+
+        void setName(string name) { this->name = name; };
+        void setSurname(string surname) { this->surname = name; };
+        void setGrades(vector<int> grades) { this->grades = grades; }
+        void setExam(int exam) { this->exam = exam; }
+        void setAverage(double average) { this->average = average; }
+        void setMedian(double median) { this->median = median; }
+        void clearGrades() { grades.clear(); }
+        void sortGrades() { sort(grades.begin(), grades.end()); };
 };
 
 void getGrades(Student &);
