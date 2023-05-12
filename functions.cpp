@@ -3,11 +3,12 @@
 void getGrades(Student &tmp)
 {
     int x;
+    vector<int> grades;
     char userInput;
 
     do
     {
-        cout << "Student's [" << tmp.Grades().size() + 1 << "] grade: ";
+        cout << "Student's [" << tmp.getGrades().size() + 1 << "] grade: ";
         
         while (!(cin >> x))
         {
@@ -16,7 +17,7 @@ void getGrades(Student &tmp)
             cout << "Invalid input. You need to type a number... ";
         }
 
-        tmp.Grades().push_back(x);
+        tmp.grades.push_back(x);
 
         cout << "Press N when finished. Press any key to continue... ";
         cin >> userInput;
@@ -27,35 +28,46 @@ void getGrades(Student &tmp)
 void findAverage(Student &tmp)
 {
     int sum = 0;
+    double average;
 
-    for (int i = 0; i < tmp.Grades().size(); i++)
+    for (int i = 0; i < tmp.getGrades().size(); i++)
     {
-        sum += tmp.Grades()[i];
+        sum += tmp.getGrades()[i];
     }
 
-    tmp.SetAverage((double)sum / tmp.Grades().size());
+    average = (double)sum / tmp.getGrades().size();
+
+    tmp.setAverage(average);
 }
 
 void findMedian(Student &tmp)
 {
-    sort(tmp.Grades().begin(), tmp.Grades().end());
+    double median;
 
-    int middle = (tmp.Grades().size()) / 2;
-    tmp.SetMedian((tmp.Grades().size() - 1) % 2 == 0 ? (tmp.Grades()[middle - 1] + (double)tmp.Grades()[middle]) / 2: tmp.Grades()[middle]);
+    tmp.sortGrades();
+    
+    int middle = (tmp.getGrades().size()) / 2;
+    median = (tmp.getGrades().size() - 1) % 2 == 0 ? (tmp.getGrades()[middle - 1] + (double)tmp.getGrades()[middle]) / 2: tmp.getGrades()[middle];
+    
+    tmp.setMedian(median);
 }
 
 void getStudent(Student &tmp)
 {
-    string name, surname;
+    string userInput;
     int x;
 
     cout << "Student's name and surname: ";
-    cin >> name >> surname;
+    cin >> userInput;
+    tmp.setName(userInput);
+
+    cin >> userInput;
+    tmp.setSurname(userInput);
 
     getGrades(tmp);
     findAverage(tmp);
     findMedian(tmp);
-    tmp.Grades().clear();
+    tmp.clearGrades();
 
     cout << "Student's exam grade: ";
 
@@ -66,9 +78,7 @@ void getStudent(Student &tmp)
         cout << "Invalid input. You need to type a number... ";
     }
     
-    tmp.SetName(name);
-    tmp.SetSurname(surname);
-    tmp.SetExam(x);
+    tmp.setExam(x);
 }
 
 void printStudents(vector<Student> tmp)
@@ -79,7 +89,7 @@ void printStudents(vector<Student> tmp)
 
     for (auto &i : tmp)
     {
-        cout << setw(30) << left << i.Name() << setw(30) << i.Surname() << setw(30) << fixed << setprecision(2) << 0.4 * i.Average() + 0.6 * i.Exam() << setw(15) << setprecision(2) << 0.4 * i.Median() + 0.6 * i.Exam() << endl;
+        cout << setw(30) << left << i.getName() << setw(30) << i.getSurname() << setw(30) << fixed << setprecision(2) << 0.4 * i.getAverage() + 0.6 * i.getExam() << setw(15) << setprecision(2) << 0.4 * i.getMedian() + 0.6 * i.getExam() << endl;
     }
 }
 
@@ -92,13 +102,14 @@ void printStudentsToFile(vector<Student> tmp, string fileName)
 
     for (auto &i : tmp)
     {
-        fr << setw(30) << left << i.Name() << setw(30) << i.Surname() << setw(30) << fixed << setprecision(2) << 0.4 * i.Average() + 0.6 * i.Exam() << setw(15) << setprecision(2) << 0.4 * i.Median() + 0.6 * i.Exam() << endl;
+        fr << setw(30) << left << i.getName() << setw(30) << i.getSurname() << setw(30) << fixed << setprecision(2) << 0.4 * i.getAverage() + 0.6 * i.getExam() << setw(15) << setprecision(2) << 0.4 * i.getMedian() + 0.6 * i.getExam() << endl;
     }
 }
 
 void readFile(vector<Student> &tmp, Student &temp, vector<Student> noob, vector<Student> nerd)
 {
-    string name, surname;
+    string userInput;
+    vector<int> grades;
     ifstream fd;
     fd.exceptions(std::ios::failbit);
     string fileName;
@@ -120,6 +131,7 @@ void readFile(vector<Student> &tmp, Student &temp, vector<Student> noob, vector<
             fd.open(fileName);
             fd.rdbuf();
             fileExists = true;
+
         } catch(std::ios_base::failure &fail) {
             cout << "Wrong file name provided. Make sure the file exists: ";
         }
@@ -137,35 +149,39 @@ void readFile(vector<Student> &tmp, Student &temp, vector<Student> noob, vector<
 
     while(!fd.eof())
     {
-        fd >> name >> surname;
+        fd >> userInput;
+        temp.setName(userInput);
 
+        fd >> userInput;
+        temp.setSurname(userInput);
+        
+        
         for (int i = 0; i < numberOfGrades; i++)
         {
             fd >> x;
-            temp.Grades().push_back(x);
+            temp.grades.push_back(x);
         }
 
         findAverage(temp);
         findMedian(temp);
 
         fd >> x;
-        temp.SetName(name);
-        temp.SetSurname(surname);
-        temp.SetExam(x);
+        temp.setExam(x);
+
         tmp.push_back(temp);
-        temp.Grades().clear();
+        temp.clearGrades();
     }
 
     sort(tmp.begin(), tmp.end(), [](Student& A, Student& B)
     { 
-        return A.Name() < B.Name(); 
+        return A.getName() < B.getName(); 
     });
 
     fd.close();
 
     methodOne ? sortStudentsMethodOne(tmp, noob) : sortStudentsMethodTwo(tmp, noob, nerd);
 
-    cout << "Program finished. You can find your results in results.txt file." << endl;
+    cout << "Program finished. You can find your results in the new files." << endl;
 }
 
 void generateFile(vector<Student> &tmp, Student &temp, vector<Student> noob)
@@ -211,7 +227,8 @@ void generateFile(vector<Student> &tmp, Student &temp, vector<Student> noob)
 
 void sortingTest(vector<Student> &tmp, Student &temp, vector<Student> noob, vector<Student> nerd)
 {
-    string name, surname;
+    string userInput;
+    vector<int> grades;
     ifstream fd;
     fd.exceptions(std::ios::failbit);
     string fileName;
@@ -252,24 +269,26 @@ void sortingTest(vector<Student> &tmp, Student &temp, vector<Student> noob, vect
 
     while(!fd.eof())
     {
-        fd >> name >> surname;
+        fd >> userInput;
+        temp.setName(userInput);
+
+        fd >> userInput;
+        temp.setSurname(userInput);
 
         for (int i = 0; i < numberOfGrades; i++)
         {
             fd >> x;
-            temp.Grades().push_back(x);
+            temp.grades.push_back(x);
         }
 
         findAverage(temp);
         findMedian(temp);
 
         fd >> x;
-        
-        temp.SetName(name);
-        temp.SetSurname(surname);
-        temp.SetExam(x);
+        temp.setExam(x);
+
         tmp.push_back(temp);
-        temp.Grades().clear();
+        temp.clearGrades();
     }
 
     fd.close();
@@ -282,7 +301,7 @@ void sortingTest(vector<Student> &tmp, Student &temp, vector<Student> noob, vect
 
     sort(tmp.begin(), tmp.end(), [](Student& A, Student& B)
     { 
-        return A.Name() < B.Name(); 
+        return A.getName() < B.getName(); 
     });
 
     timeEnd = std::chrono::system_clock::now();
@@ -305,11 +324,11 @@ int getRandomGrade() {
 
 void sortStudentsMethodOne(vector<Student> tmp, vector<Student> &noob)
 {
-    auto findNoob = [](auto &i) { return 0.4 * i.Average() + 0.6 * i.Exam() < 5; };
+    auto findNoob = [](auto &i) { return 0.4 * i.getAverage() + 0.6 * i.getExam() < 5; };
 
     for (auto &i : tmp)
     {
-        if (0.4 * i.Average() + 0.6 * i.Exam() < 5) 
+        if (0.4 * i.getAverage() + 0.6 * i.getExam() < 5) 
         {
             noob.push_back(i);
             auto itr = find_if(tmp.begin(), tmp.end(), findNoob);
@@ -325,8 +344,8 @@ void sortStudentsMethodTwo(vector<Student> tmp, vector<Student> &noob, vector<St
 {
     for (auto &i : tmp)
     {
-        if (0.4 * i.Average() + 0.6 * i.Exam() < 5) noob.push_back(i);
-        else if(0.4 * i.Average() + 0.6 * i.Exam() >= 5) nerd.push_back(i);
+        if (0.4 * i.getAverage() + 0.6 * i.getExam() < 5) noob.push_back(i);
+        else if(0.4 * i.getAverage() + 0.6 * i.getExam() >= 5) nerd.push_back(i);
 
     }
 
