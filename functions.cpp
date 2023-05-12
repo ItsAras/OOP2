@@ -352,3 +352,28 @@ void sortStudentsMethodTwo(vector<Student> tmp, vector<Student> &noob, vector<St
     printStudentsToFile(nerd, "nerds");
     printStudentsToFile(noob, "noobs");
 }
+
+void runTest()
+{
+    Student s1;
+
+    s1.setName("Testas");
+    s1.setSurname("Testuotojas");
+    s1.setExam(10);
+
+    cout << "Student S1: " << s1.getName() << " " << s1.getSurname() << " " << s1.getExam() << endl;
+
+    Student s2(s1);
+
+    cout << "Student S2: " << s2.getName() << " " << s2.getSurname() << " " << s2.getExam() << endl;
+
+    s2.setName("ABC");
+    s2.setSurname("DEF");
+    s2.setExam(1);
+
+    cout << "Student S2: " << s2.getName() << " " << s2.getSurname() << " " << s2.getExam() << endl;
+
+    Student s4 = s2;
+
+    cout << "Student S4: " << s4.getName() << " " << s4.getSurname() << " " << s4.getExam() << endl;
+}
