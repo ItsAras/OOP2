@@ -21,6 +21,10 @@ int main()
     cin >> userInput;
     if (userInput == 'y' || userInput == 'Y') sortingTest(student, tmp, noob, nerd);
 
+    cout << "Do you want to run a test for (Rule Of Five)? Y - (YES), N - (NO): ";
+    cin >> userInput;
+    if (userInput == 'y' || userInput == 'Y') runTest();
+
     else
     {
         do
