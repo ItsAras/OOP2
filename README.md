@@ -19,4 +19,10 @@ V1.2: Implemented the Rule Of Five.
 V1.5: Improved security by creating a base class Human and a derived class Student.
 
 V2.0: Implemented unit testing using Google Test1. Created an installer for the program. Created documentation using Doxygen.
+
+Installing:
+1. Download INSTALLER.msi and setup.exe from installer folder.
+2. Run setup.exe file.
+3. Follow installation wizard and complete the installation. Choose where to install the program.
+4. Run program .exe file to start the program.
  
