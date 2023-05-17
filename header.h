@@ -25,8 +25,6 @@ using std::getline;
 using std::to_string;
 using std::find_if;
 
-
-
 class Human
 {
     protected:
@@ -76,6 +74,48 @@ class Student : public Human {
         void setMedian(double median) { this->median = median; }
         void clearGrades() { grades.clear(); }
         void sortGrades() { sort(grades.begin(), grades.end()); }
+
+        Student& operator=(Student&& other) noexcept {
+            if (this != &other) {
+                Human::operator=(std::move(other));
+                exam = other.exam;
+                average = other.average;
+                median = other.median;
+                grades = std::move(other.grades);
+
+                other.name = "";
+                other.surname = "";
+                other.exam = 0;
+                other.average = 0;
+                other.median = 0;
+                other.grades.clear();
+            }
+            return *this;
+        }
+
+        Student(Student&& other) noexcept
+            : Human(std::move(other)), exam(other.exam), average(other.average), median(other.median), grades(std::move(other.grades)) {
+            other.name = "";
+            other.surname = "";
+            other.exam = 0;
+            other.average = 0;
+            other.median = 0;
+            other.grades.clear();
+        }
+
+        Student& operator=(const Student& other) {
+            if (this != &other) {
+                Human::operator=(other);
+                exam = other.exam;
+                average = other.average;
+                median = other.median;
+                grades = other.grades;
+            }
+            return *this;
+        }
+
+        Student(const Student& other)
+        : Human(other), exam(other.exam), average(other.average), median(other.median), grades(other.grades) {}
 };
 
 void getGrades(Student &);
