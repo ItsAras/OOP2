@@ -33,53 +33,49 @@ class Human
         string name;
         string surname;
 
+
     public:
         Human() = default;
         Human(const string& name, const string& surname)
             : name(name), surname(surname) {}
-
         virtual ~Human() = default;
-
-        inline string getName() const { return name; }
-        inline string getSurname() const { return surname; }
-
-        void setName(const string& name) { this->name = name; }
-        void setSurname(const string& surname) { this->surname = surname; }
+        virtual inline string getName() const = 0;
+        virtual inline string getSurname() const = 0;
+        virtual void setName(const string& name) = 0;
+        virtual void setSurname(const string& surname) = 0;
 };
 
 class Student : public Human {
-private:
-    int exam;
-    double average;
-    double median;
-    
+    private:
+        int exam;
+        double average;
+        double median;
+        
+    public:
+        vector<int> grades;
 
-public:
-    vector<int> grades;
+        Student() : exam(0), average(0), median(0) {}
+        Student(const string& name, const string& surname)
+            : Human(name, surname), exam(0), average(0), median(0) {}
+        Student(const string& name, const string& surname, const vector<int>& grades, int exam, double average, double median)
+            : Human(name, surname), exam(exam), average(average), median(median), grades(grades) {}
 
-    Student() : exam(0), average(0), median(0) {}
-    Student(const string& name, const string& surname)
-        : Human(name, surname), exam(0), average(0), median(0) {}
-    Student(const string& name, const string& surname, const vector<int>& grades, int exam, double average, double median)
-        : Human(name, surname), exam(exam), average(average), median(median), grades(grades) {}
+        inline string getName() const { return name; }
+        inline string getSurname() const { return surname; }
+        const vector<int>& getGrades() const { return grades; }
+        inline int getExam() const { return exam; }
+        inline double getAverage() const { return average; }
+        inline double getMedian() const { return median; }
 
-    const vector<int>& getGrades() const { return grades; }
-    inline int getExam() const { return exam; }
-    inline double getAverage() const { return average; }
-    inline double getMedian() const { return median; }
 
-    void setGrades(const vector<int>& grades) { this->grades = grades; }
-    void setExam(int exam) { this->exam = exam; }
-    void setAverage(double average) { this->average = average; }
-    void setMedian(double median) { this->median = median; }
-    void clearGrades() { grades.clear(); }
-    void sortGrades() { sort(grades.begin(), grades.end()); }
-
-    virtual ~Student() = default;
-    Student(const Student& other) = default;
-    Student& operator=(const Student& other) = default;
-    Student(Student&& other) noexcept = default;
-    Student& operator=(Student&& other) noexcept = default;
+        void setName(const string& name) { this->name = name; }
+        void setSurname(const string& surname) { this->surname = surname; }
+        void setGrades(const vector<int>& grades) { this->grades = grades; }
+        void setExam(int exam) { this->exam = exam; }
+        void setAverage(double average) { this->average = average; }
+        void setMedian(double median) { this->median = median; }
+        void clearGrades() { grades.clear(); }
+        void sortGrades() { sort(grades.begin(), grades.end()); }
 };
 
 void getGrades(Student &);
