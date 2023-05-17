@@ -25,4 +25,11 @@ Installing:
 2. Run setup.exe file.
 3. Follow installation wizard and complete the installation. Choose where to install the program.
 4. Run program .exe file to start the program.
+
+Usage:
+1. Choose your container type and run the program.
+2. You will be asked if you want to read data from a file (If you have a file to read from press - Y, else press - N). If you proceed with this option you will need to choose which method you will use to sort students (0 OR 1). After that you type your file's name and the results will be outputted into results.txt file.
+3. Next you will be asked if you want to generate a file. (If you want to generate press - Y, else press - N). If you proceed with this option you will be asked how much students and grades you want to generate. After your input a file will be generated.
+4. Next you will be asked if you want to run a benchmark. (If you want to generate press - Y, else press - N). If you proceed with this option you will be asked which method you will want to use for students diving (0 OR 1). After that you need to choose your file with students and your program will be benchmarked.
+5. After that you will have a manual student and grade reading from console.
  
