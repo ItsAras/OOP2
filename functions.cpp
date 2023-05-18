@@ -356,24 +356,27 @@ void sortStudentsMethodTwo(vector<Student> tmp, vector<Student> &noob, vector<St
 void runTest()
 {
     Student s1;
-
     s1.setName("Testas");
     s1.setSurname("Testuotojas");
     s1.setExam(10);
-
     cout << "Student S1: " << s1.getName() << " " << s1.getSurname() << " " << s1.getExam() << endl;
 
     Student s2(s1);
-
     cout << "Student S2: " << s2.getName() << " " << s2.getSurname() << " " << s2.getExam() << endl;
-
-    s2.setName("ABC");
-    s2.setSurname("DEF");
+    s2.setName("Testas2");
+    s2.setSurname("Testuotojas2");
     s2.setExam(1);
 
+    Student s3;
+    s3 = std::move(s2);
+    cout << "Student S3: " << s3.getName() << " " << s3.getSurname() << " " << s3.getExam() << endl;
     cout << "Student S2: " << s2.getName() << " " << s2.getSurname() << " " << s2.getExam() << endl;
 
-    Student s4 = s2;
+    Student s4;
+    s4 = s3;
+    cout << "Student S4: " << s4.getName() << " " << s4.getSurname() << " " << s4.getExam() << endl;
 
+    Student s5{std::move(s4)};
+    cout << "Student S5: " << s5.getName() << " " << s5.getSurname() << " " << s5.getExam() << endl;
     cout << "Student S4: " << s4.getName() << " " << s4.getSurname() << " " << s4.getExam() << endl;
 }
