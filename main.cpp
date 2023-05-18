@@ -1,6 +1,6 @@
 #include "header.h"
 
-int main(int argc, char* argv[])
+int main()
 {
     char userInput;
     vector<Student> student;
@@ -8,8 +8,6 @@ int main(int argc, char* argv[])
     vector<Student> nerd;
     Student tmp;
     srand(time(NULL));
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 
     cout << "Do you want to read data from a file? Y - (YES), N - (NO): ";
     cin >> userInput;
